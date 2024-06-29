@@ -1,16 +1,41 @@
-# weather_app
+# Weather APP
+- This project use OpenWeatherMap apı for weather information 
 
-A new Flutter project.
 
-## Getting Started
+ 
+### FEAUTURES:
+- Fetch weather info from  an API and display it.
+- Search weather by city  name.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+<img src="https://github.com/ahmetbekir22/weather-app-flutter/assets/118047063/b8618db7-cab4-4c4e-8654-1f27febfb572" alt="WhatsApp Image 2024-06-29 at 19 33 16" width="300" />       .   
+<img src="https://github.com/ahmetbekir22/weather-app-flutter/assets/118047063/8d3bcf23-27f7-495f-ab2a-85ee4547189b" alt="WhatsApp Image 2024-06-29 at 19 33 37" width="300" />
+
+
+
+
+## Installation
+
+```bash
+git clone https://github.com/ahmetbekir22/weather-app-flutter.git
+```
+
+## Usage
+
+### INSTALL DEPENDICIES: 
+```bash
+flutter pub get
+```
+### RUN THE APP: 
+```bash
+flutter run
+```
+
+
+
+
+
