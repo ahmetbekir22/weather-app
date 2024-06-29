@@ -4,7 +4,8 @@ import 'package:weather/weather.dart';
 import 'package:weather_app/constant.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String city;
+  const HomePage({super.key, required this.city});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -13,10 +14,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final WeatherFactory _weatherFactory = WeatherFactory(weather_api_key);
   Weather? _weather;
+
   @override
   void initState() {
     super.initState();
-    _weatherFactory.currentWeatherByCityName("İstanbul").then((weather) {
+    getCityWeather(widget.city);
+  }
+
+  void getCityWeather(String city) {
+    _weatherFactory.currentWeatherByCityName(city).then((weather) {
       setState(() {
         _weather = weather;
       });
@@ -26,7 +32,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildUI(),
+      appBar: AppBar(
+        title: const Text("Weather App"),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 157, 131, 200),
+      ),
+      body: SingleChildScrollView(child: _buildUI()),
     );
   }
 
@@ -41,13 +52,16 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.02,
+        ),
         _dateTimeInfo(),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.05,
+          height: MediaQuery.of(context).size.height * 0.02,
         ),
         _locationHeader(),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.05,
+          height: MediaQuery.of(context).size.height * 0.02,
         ),
         _weatherIcon(),
         SizedBox(
@@ -120,7 +134,7 @@ class _HomePageState extends State<HomePage> {
     return Text(
       "${_weather?.temperature?.celsius?.toStringAsFixed(0)}°",
       style: const TextStyle(
-        fontSize: 80,
+        fontSize: 70,
         fontWeight: FontWeight.w500,
       ),
     );
@@ -131,7 +145,7 @@ class _HomePageState extends State<HomePage> {
       height: MediaQuery.of(context).size.height * 0.15,
       width: MediaQuery.of(context).size.width * 0.8,
       decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 99, 122, 144),
+          color: const Color.fromARGB(255, 179, 192, 205),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
@@ -151,7 +165,6 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
                 Text(
                   "Max: ${_weather!.tempMax?.celsius?.toStringAsFixed(0)}°",
                   style: const TextStyle(
@@ -159,7 +172,6 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                
                 Text(
                   "Min: ${_weather!.tempMin?.celsius?.toStringAsFixed(0)}°",
                   style: const TextStyle(
@@ -175,15 +187,14 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Humudity: ${_weather?.humidity?.toStringAsFixed(0)}%",
+                  "Humidity: ${_weather?.humidity?.toStringAsFixed(0)}%",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                
                 Text(
-                  "Wind:${_weather?.windSpeed?.toStringAsFixed(0)} m/s",
+                  "Wind: ${_weather?.windSpeed?.toStringAsFixed(0)} m/s",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
